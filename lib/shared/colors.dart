@@ -7,5 +7,7 @@ class Palette {
 
   static const buttonColor = Color(0xFFE2A868);
 
+  static const gameBoard = Color.fromARGB(255, 24, 144, 28);
+
   static const title = Colors.white;
 }

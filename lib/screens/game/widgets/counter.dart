@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shut_the_box/screens/game/game.dart';
 import 'package:shut_the_box/shared/styles.dart';
 
 class Counter extends StatefulWidget {
@@ -25,6 +26,7 @@ class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
         if (status == AnimationStatus.completed) {
           setState(() {
             isVisible = false;
+            Game.opacityValue = 1;
           });
         }
       });

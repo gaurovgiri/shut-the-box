@@ -5,13 +5,13 @@ import 'package:shut_the_box/shared/colors.dart';
 
 class Game extends StatelessWidget {
   const Game({super.key});
-
+  static double opacityValue = 0.2;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Palette.background,
       body: Stack(
-        children: [Board(), Counter()],
+        children: [Opacity(opacity: opacityValue, child: Board()), Counter()],
       ),
     );
   }
