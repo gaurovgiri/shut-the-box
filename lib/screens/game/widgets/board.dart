@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:shut_the_box/screens/game/widgets/bar.dart';
+import 'package:shut_the_box/screens/game/widgets/dice.dart';
 import 'package:shut_the_box/screens/game/widgets/piece.dart';
 import 'package:shut_the_box/screens/game/widgets/roll_button.dart';
 import 'package:shut_the_box/shared/colors.dart';
+import 'package:shut_the_box/shared/styles.dart';
 
-class Board extends StatelessWidget {
+class Board extends StatefulWidget {
   const Board({super.key});
+
+  @override
+  State<Board> createState() => _BoardState();
+}
+
+class _BoardState extends State<Board> {
+  List<int>? diceRollResult;
+
+  void updateDiceRoll(List<int> result) {
+    setState(() {
+      diceRollResult = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +32,24 @@ class Board extends StatelessWidget {
         ),
         const Bar(),
         const Pieces(),
-        Container(
-          height: 300,
-          decoration: const BoxDecoration(color: Palette.gameBoard),
-        ),
+        Stack(children: [
+          Container(
+            height: 300,
+            decoration: const BoxDecoration(color: Palette.gameBoard),
+          ),
+          Dice(diceList: diceRollResult)
+        ]),
         const Bar(),
         const SizedBox(
           height: 50,
         ),
-        const RollButton()
+        if (diceRollResult != null)
+          Text(
+            "Dice Roll: $diceRollResult",
+            style: Styles.footer,
+          ),
+        const SizedBox(height: 50),
+        RollButton(onRoll: updateDiceRoll),
       ],
     );
   }
