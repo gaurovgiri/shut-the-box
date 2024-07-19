@@ -17,7 +17,7 @@ class PlayButton extends StatelessWidget {
         onPressed: () {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Game();
+            return const Game();
           }));
         },
         child: const Text(

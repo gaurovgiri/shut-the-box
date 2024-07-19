@@ -11,7 +11,7 @@ class Game extends StatelessWidget {
     return Scaffold(
       backgroundColor: Palette.background,
       body: Stack(
-        children: [Opacity(opacity: opacityValue, child: Board()), Counter()],
+        children: [Opacity(opacity: opacityValue, child: const Board()), const Counter()],
       ),
     );
   }

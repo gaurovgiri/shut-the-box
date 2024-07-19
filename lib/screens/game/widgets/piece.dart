@@ -4,7 +4,7 @@ import 'package:shut_the_box/shared/styles.dart';
 class Piece extends StatefulWidget {
   final int number;
 
-  Color pieceColor = Color.fromARGB(255, 236, 202, 31);
+  Color pieceColor = const Color.fromARGB(255, 236, 202, 31);
   bool selected = false;
 
   Piece({super.key, required this.number});

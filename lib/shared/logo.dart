@@ -43,7 +43,7 @@ class _LogoState extends State<Logo> with SingleTickerProviderStateMixin {
         children: [
           AnimatedBuilder(
             animation: _controller,
-            child: Image.asset("assets/images/dice.png"),
+            child: Image.asset("assets/images/dice_logo.png"),
             builder: (context, child) {
               return Transform.rotate(
                 angle: _controller.value *

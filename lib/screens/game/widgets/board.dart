@@ -15,13 +15,13 @@ class Board extends StatelessWidget {
         const SizedBox(
           height: 100,
         ),
-        Bar(),
+        const Bar(),
         const Pieces(),
         Container(
           height: 300,
           decoration: const BoxDecoration(color: Palette.gameBoard),
         ),
-        Bar(),
+        const Bar(),
         const SizedBox(
           height: 50,
         ),
