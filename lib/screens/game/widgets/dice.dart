@@ -40,32 +40,34 @@ class _DiceState extends State<Dice> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: widget.diceList!
-                .map((diceValue) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Transform.rotate(
-                        angle: _controller.value *
-                            2 *
-                            3.14159, // Rotate the dice image
-                        child: Image.asset(
-                          'assets/images/dice/Dice$diceValue.png',
-                          width: 150,
-                          height: 200,
-                        ),
-                      ),
-                    ))
-                .toList(),
+    return widget.diceList == null
+        ? const SizedBox()
+        : SizedBox(
+            height: 300,
+            width: MediaQuery.of(context).size.width,
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widget.diceList!
+                      .map((diceValue) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Transform.rotate(
+                              angle: _controller.value *
+                                  2 *
+                                  3.14159, // Rotate the dice image
+                              child: Image.asset(
+                                'assets/images/dice/Dice$diceValue.png',
+                                width: 150,
+                                height: 200,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
   }
 }
