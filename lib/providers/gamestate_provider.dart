@@ -20,18 +20,22 @@ class GameStateProvider extends ChangeNotifier {
 
   void setGameStart() {
     _gameStarted = true;
+    notifyListeners();
   }
 
   void setRollState(bool isRolling) {
     _rollState = isRolling;
+    notifyListeners();
   }
 
   void setWon(bool hasWon) {
     _won = hasWon;
+    notifyListeners();
   }
 
   void setGameOver(bool hasGameOver) {
     _gameOver = hasGameOver;
+    notifyListeners();
   }
 
   void resetGame() {
@@ -39,5 +43,6 @@ class GameStateProvider extends ChangeNotifier {
     _gameOver = false;
     _won = false;
     _gameStarted = false;
+    notifyListeners();
   }
 }

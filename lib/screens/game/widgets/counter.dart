@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shut_the_box/providers/gamestate_provider.dart';
 import 'package:shut_the_box/screens/game/game.dart';
 import 'package:shut_the_box/shared/styles.dart';
 
@@ -12,11 +14,12 @@ class Counter extends StatefulWidget {
 class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<int> _countdownAnimation;
-  bool isVisible = true;
+  late GameStateProvider gameState;
 
   @override
   void initState() {
     super.initState();
+    gameState = Provider.of<GameStateProvider>(context, listen: false);
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
@@ -25,8 +28,7 @@ class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           setState(() {
-            isVisible = false;
-            Game.opacityValue = 1;
+            gameState.setGameStart();
           });
         }
       });
@@ -45,7 +47,7 @@ class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
       child: AnimatedBuilder(
         animation: _countdownAnimation,
         builder: (context, child) {
-          return isVisible
+          return !gameState.gameStarted
               ? Text(
                   _countdownAnimation.value != 0
                       ? (_countdownAnimation.value).toString()

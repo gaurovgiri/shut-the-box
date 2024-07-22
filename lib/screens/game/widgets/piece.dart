@@ -1,41 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shut_the_box/providers/gamestate_provider.dart';
+import 'package:shut_the_box/providers/piece_provider.dart';
 import 'package:shut_the_box/shared/styles.dart';
 
-class Piece extends StatefulWidget {
+class Piece extends StatelessWidget {
   final int number;
 
-  Color pieceColor = const Color.fromARGB(255, 236, 202, 31);
-  bool selected = false;
+  const Piece({super.key, required this.number});
 
-  Piece({super.key, required this.number});
-
-  @override
-  State<Piece> createState() => _PieceState();
-}
-
-class _PieceState extends State<Piece> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          widget.pieceColor = widget.selected
-              ? const Color.fromARGB(255, 236, 202, 31)
-              : Colors.brown;
-          widget.selected = !widget.selected;
-        });
-      },
-      child: Container(
-        height: 100,
-        width: 42,
-        decoration: BoxDecoration(color: widget.pieceColor),
-        child: Center(
-            child: Text(
-          widget.number.toString(),
-          style: Styles.title,
-        )),
-      ),
-    );
+    final gameStateProvider = context.watch<GameStateProvider>();
+    return Consumer<PieceProvider>(builder: (context, value, child) {
+      return InkWell(
+        onTap: () {
+          if (!gameStateProvider.rollState) {
+            value.setPiece(number);
+          }
+        },
+        child: Container(
+          height: 100,
+          width: 42,
+          decoration: BoxDecoration(
+              color: !value.pieces[number]!
+                  ? const Color.fromARGB(255, 236, 202, 31)
+                  : Colors.brown),
+          child: Center(
+              child: Text(
+            number.toString(),
+            style: Styles.title,
+          )),
+        ),
+      );
+    });
   }
 }
 

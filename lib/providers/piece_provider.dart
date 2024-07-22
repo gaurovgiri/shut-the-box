@@ -12,9 +12,8 @@ class PieceProvider extends ChangeNotifier {
     };
   }
 
-  void setPiece(List<int> numbers) {
-    for (int num in numbers) {
-      _pieces[num] = true;
-    }
+  void setPiece(int number) {
+    _pieces[number] = !_pieces[number]!;
+    notifyListeners();
   }
 }

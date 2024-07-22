@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shut_the_box/providers/gamestate_provider.dart';
 
 import 'package:shut_the_box/shared/colors.dart';
 import 'package:shut_the_box/shared/styles.dart';
@@ -11,8 +13,9 @@ class RollButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gameStateProvider = context.watch<GameStateProvider>();
     return SizedBox(
-      width: 150,
+      width: 160,
       height: 100,
       child: ElevatedButton(
         style: ButtonStyle(
@@ -21,16 +24,27 @@ class RollButton extends StatelessWidget {
           backgroundColor: WidgetStateProperty.all<Color>(Palette.buttonColor),
         ),
         onPressed: () {
-          int result1 = rollDice();
-          int result2 = rollDice();
-          List<int> result = [result1, result2];
-          onRoll(result);
+          if (gameStateProvider.rollState) {
+            int result1 = rollDice();
+            int result2 = rollDice();
+            List<int> result = [result1, result2];
+            onRoll(result);
+            gameStateProvider.setRollState(false);
+          } else {
+            gameStateProvider.setRollState(true);
+          }
         },
-        child: const Text(
-          "Roll 🎲",
-          style: Styles.title,
-          textAlign: TextAlign.center,
-        ),
+        child: gameStateProvider.rollState
+            ? const Text(
+                "Roll 🎲",
+                style: Styles.title,
+                textAlign: TextAlign.center,
+              )
+            : const Text(
+                "Done ✅",
+                style: Styles.title,
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }
