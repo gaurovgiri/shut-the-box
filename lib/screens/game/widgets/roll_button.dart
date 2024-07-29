@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shut_the_box/providers/gamestate_provider.dart';
+import 'package:shut_the_box/providers/piece_provider.dart';
 
 import 'package:shut_the_box/shared/colors.dart';
 import 'package:shut_the_box/shared/styles.dart';
@@ -14,6 +15,7 @@ class RollButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameStateProvider = context.watch<GameStateProvider>();
+    final PieceProvider pieceProvider = context.read<PieceProvider>();
     return SizedBox(
       width: 160,
       height: 100,
@@ -31,6 +33,7 @@ class RollButton extends StatelessWidget {
             onRoll(result);
             gameStateProvider.setRollState(false);
           } else {
+            pieceProvider.setPiece();
             gameStateProvider.setRollState(true);
           }
         },

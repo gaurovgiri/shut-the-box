@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shut_the_box/providers/gamestate_provider.dart';
-import 'package:shut_the_box/screens/game/game.dart';
 import 'package:shut_the_box/shared/styles.dart';
 
 class Counter extends StatefulWidget {

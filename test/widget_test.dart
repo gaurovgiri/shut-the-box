@@ -7,23 +7,27 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:shut_the_box/screens/home/home.dart';
+import 'package:shut_the_box/screens/game/game.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Play Button navigates to Game screen',
+      (WidgetTester tester) async {
+    // Build the Home widget wrapped in a MaterialApp.
+    await tester.pumpWidget(MaterialApp(home: Home()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the Home screen is displayed.
+    expect(find.byType(Home), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Find the Play button and tap it.
+    final playButton = find.text('Play');
+    expect(playButton, findsOneWidget);
+    await tester.tap(playButton);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Rebuild the widget after the state has changed.
+    await tester.pumpAndSettle();
+
+    // Verify that the Game screen is displayed.
+    expect(find.byType(Game), findsOneWidget);
   });
 }

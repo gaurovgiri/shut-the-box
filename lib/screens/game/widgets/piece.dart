@@ -16,7 +16,7 @@ class Piece extends StatelessWidget {
       return InkWell(
         onTap: () {
           if (!gameStateProvider.rollState) {
-            value.setPiece(number);
+            value.togglePiece(number);
           }
         },
         child: Container(
@@ -25,7 +25,9 @@ class Piece extends StatelessWidget {
           decoration: BoxDecoration(
               color: !value.pieces[number]!
                   ? const Color.fromARGB(255, 236, 202, 31)
-                  : Colors.brown),
+                  : !value.alreadySetPiece.contains(number)
+                      ? Colors.brown
+                      : const Color.fromARGB(255, 175, 116, 76)),
           child: Center(
               child: Text(
             number.toString(),
