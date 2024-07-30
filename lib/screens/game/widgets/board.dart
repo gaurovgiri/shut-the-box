@@ -13,14 +13,6 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  List<int>? diceRollResult;
-
-  void updateDiceRoll(List<int> result) {
-    setState(() {
-      diceRollResult = result;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,14 +29,14 @@ class _BoardState extends State<Board> {
             height: 300,
             decoration: const BoxDecoration(color: Palette.gameBoard),
           ),
-          Dice(diceList: diceRollResult)
+          const Dice()
         ]),
         const Bar(),
         const SizedBox(
           height: 50,
         ),
         const SizedBox(height: 50),
-        RollButton(onRoll: updateDiceRoll),
+        const RollButton(),
       ],
     );
   }

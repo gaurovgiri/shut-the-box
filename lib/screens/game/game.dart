@@ -17,7 +17,8 @@ class Game extends StatelessWidget {
             return Stack(
               children: [
                 Opacity(
-                    opacity: value.gameStarted ? 1 : opacityValue,
+                    opacity:
+                        value.gameStarted && !value.gameOver ? 1 : opacityValue,
                     child: const Board()),
                 const Counter()
               ],

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shut_the_box/controllers/gamecontroller.dart';
@@ -11,8 +9,7 @@ import 'package:shut_the_box/shared/colors.dart';
 import 'package:shut_the_box/shared/styles.dart';
 
 class RollButton extends StatelessWidget {
-  final Function(List<int>) onRoll;
-  const RollButton({super.key, required this.onRoll});
+  const RollButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +29,6 @@ class RollButton extends StatelessWidget {
         onPressed: () {
           if (gameStateProvider.rollState) {
             diceProvider.rollDice();
-            onRoll(diceProvider.dice);
             gameStateProvider.setRollState(false);
           } else {
             if (gameController.validateGame(
@@ -40,7 +36,9 @@ class RollButton extends StatelessWidget {
               if (gameController.validateMove(
                   diceProvider.dice,
                   pieceProvider.pieces.entries
-                      .where((entry) => entry.value)
+                      .where((entry) =>
+                          entry.value &&
+                          !pieceProvider.alreadySetPiece.contains(entry.key))
                       .map((entry) => entry.key)
                       .toList())) {
                 pieceProvider.setPiece();
@@ -71,8 +69,4 @@ class RollButton extends StatelessWidget {
       ),
     );
   }
-}
-
-int rollDice() {
-  return Random().nextInt(6) + 1; // Generates a random number between 1 and 6
 }
