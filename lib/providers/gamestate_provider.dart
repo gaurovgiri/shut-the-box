@@ -32,6 +32,7 @@ class GameStateProvider extends ChangeNotifier {
 
   void setWon(bool hasWon) {
     _won = hasWon;
+    _gameOver = hasWon;
     notifyListeners();
   }
 

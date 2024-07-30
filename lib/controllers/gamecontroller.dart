@@ -15,12 +15,14 @@ class GameController {
 
   bool validateGame(List<int> dice, List<int> alreadySet) {
     int totalSum = dice.reduce((a, b) => a + b);
-    if (alreadySet.contains(dice.first) &&
-        alreadySet.contains(dice.last) &&
-        alreadySet.contains(totalSum)) {
-      return false;
-    } else {
+    bool isFirstDiceAvailable = !alreadySet.contains(dice.first);
+    bool isLastDiceAvailable = !alreadySet.contains(dice.last);
+    bool isSumAvailable = !alreadySet.contains(totalSum);
+
+    if ((isFirstDiceAvailable && isLastDiceAvailable) || isSumAvailable) {
       return true;
+    } else {
+      return false;
     }
   }
 }

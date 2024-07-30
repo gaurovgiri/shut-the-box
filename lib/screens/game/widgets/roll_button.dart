@@ -41,7 +41,7 @@ class RollButton extends StatelessWidget {
                           !pieceProvider.alreadySetPiece.contains(entry.key))
                       .map((entry) => entry.key)
                       .toList())) {
-                pieceProvider.setPiece();
+                gameStateProvider.setWon(pieceProvider.setPiece());
                 gameStateProvider.setRollState(true);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

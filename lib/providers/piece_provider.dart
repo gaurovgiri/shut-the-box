@@ -24,10 +24,15 @@ class PieceProvider extends ChangeNotifier {
     }
   }
 
-  void setPiece() {
+  bool setPiece() {
     _alreadySetPiece.addAll(_pieces.entries
-        .where((entry) => entry.value)
+        .where((entry) => entry.value && !_alreadySetPiece.contains(entry.key))
         .map((entry) => entry.key));
+    if (_alreadySetPiece.length == 9) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   void resetPieces() {

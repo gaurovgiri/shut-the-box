@@ -4,6 +4,7 @@ import 'package:shut_the_box/providers/gamestate_provider.dart';
 import 'package:shut_the_box/screens/game/widgets/board.dart';
 import 'package:shut_the_box/screens/game/widgets/counter.dart';
 import 'package:shut_the_box/shared/colors.dart';
+import 'package:shut_the_box/shared/styles.dart';
 
 class Game extends StatelessWidget {
   const Game({super.key});
@@ -17,10 +18,17 @@ class Game extends StatelessWidget {
             return Stack(
               children: [
                 Opacity(
-                    opacity:
-                        value.gameStarted && !value.gameOver ? 1 : opacityValue,
+                    opacity: value.gameStarted && !value.gameOver && !value.won
+                        ? 1
+                        : opacityValue,
                     child: const Board()),
-                const Counter()
+                const Counter(),
+                if (value.gameOver)
+                  Center(
+                      child: Text(
+                    value.won ? "You Won!" : "You Lost",
+                    style: Styles.title,
+                  ))
               ],
             );
           },
