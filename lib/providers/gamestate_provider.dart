@@ -5,11 +5,13 @@ class GameStateProvider extends ChangeNotifier {
   late bool _gameOver;
   late bool _won;
   late bool _gameStarted;
+  late bool _validSelection;
 
   bool get rollState => _rollState;
   bool get gameOver => _gameOver;
   bool get won => _won;
   bool get gameStarted => _gameStarted;
+  bool get validSelection => _validSelection;
 
   GameStateProvider() {
     _rollState = true;
@@ -44,5 +46,9 @@ class GameStateProvider extends ChangeNotifier {
     _won = false;
     _gameStarted = false;
     notifyListeners();
+  }
+
+  void setValidSelection() {
+    _validSelection = true;
   }
 }

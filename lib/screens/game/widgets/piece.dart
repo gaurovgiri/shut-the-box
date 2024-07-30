@@ -41,11 +41,13 @@ class Piece extends StatelessWidget {
 
 class Pieces extends StatelessWidget {
   const Pieces({super.key});
+  static const int numberOfPieces = 9;
 
   @override
   Widget build(BuildContext context) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(9, (index) => Piece(number: index + 1)));
+        children:
+            List.generate(numberOfPieces, (index) => Piece(number: index + 1)));
   }
 }

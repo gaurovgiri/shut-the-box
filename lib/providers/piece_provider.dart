@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shut_the_box/screens/game/widgets/piece.dart';
 
 class PieceProvider extends ChangeNotifier {
   late Map<int, bool> _pieces;
@@ -9,7 +10,8 @@ class PieceProvider extends ChangeNotifier {
 
   PieceProvider() {
     _pieces = {
-      for (var piece in List<int>.generate(9, (index) => index + 1))
+      for (var piece
+          in List<int>.generate(Pieces.numberOfPieces, (index) => index + 1))
         piece: false
     };
     _alreadySetPiece = [];
@@ -26,5 +28,12 @@ class PieceProvider extends ChangeNotifier {
     _alreadySetPiece.addAll(_pieces.entries
         .where((entry) => entry.value)
         .map((entry) => entry.key));
+  }
+
+  void resetPieces() {
+    _alreadySetPiece = [];
+    for (var piece in _pieces.entries) {
+      _pieces[piece.key] = false;
+    }
   }
 }

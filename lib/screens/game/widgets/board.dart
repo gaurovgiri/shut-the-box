@@ -4,7 +4,6 @@ import 'package:shut_the_box/screens/game/widgets/dice.dart';
 import 'package:shut_the_box/screens/game/widgets/piece.dart';
 import 'package:shut_the_box/screens/game/widgets/roll_button.dart';
 import 'package:shut_the_box/shared/colors.dart';
-import 'package:shut_the_box/shared/styles.dart';
 
 class Board extends StatefulWidget {
   const Board({super.key});
@@ -32,6 +31,7 @@ class _BoardState extends State<Board> {
         ),
         const Bar(),
         const Pieces(),
+        const Bar(),
         Stack(children: [
           Container(
             height: 300,
@@ -43,11 +43,6 @@ class _BoardState extends State<Board> {
         const SizedBox(
           height: 50,
         ),
-        if (diceRollResult != null)
-          Text(
-            "Dice Roll: $diceRollResult",
-            style: Styles.footer,
-          ),
         const SizedBox(height: 50),
         RollButton(onRoll: updateDiceRoll),
       ],
